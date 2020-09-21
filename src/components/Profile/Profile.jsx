@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
+import MyPosts from "./MyPosts/MyPosts";
 import styles from "./Profile.module.css";
 
 const Profile = () => {
@@ -12,16 +13,7 @@ const Profile = () => {
         />
       </div>
       <div>ava + disc</div>
-      <div>
-        my post
-        <div>new post</div>
-        <div className={styles.posts}>
-          <div className={styles.item}>
-            <a href="#">post 1</a>
-          </div>
-          <div className="item">post 2</div>
-        </div>
-      </div>
+      <MyPosts />
     </div>
   );
 };
