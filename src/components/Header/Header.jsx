@@ -5,9 +5,10 @@ const Header = () => {
   return (
     <header className={styles.header}>
       <img
-        src="https://cdn.worldvectorlogo.com/logos/react-native-firebase-1.svg"
+        src="https://everlife.ai/images/muscari/header-image-muscari.png"
         alt="logo"
       />
+      <span>Social network</span> 
     </header>
   );
 };
