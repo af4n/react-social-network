@@ -1,9 +1,5 @@
 .nav {
   grid-area: n;
-  background: burlywood;
-}
-.item a {
-  color: white;
 }
 .item.active a {
   color: red;
