@@ -3,7 +3,8 @@ import React from "react";
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
 
-const MyPosts = () => {
+const MyPosts = (props) => {
+  let postElements = props.postsData.map(post => <Post message={post.message} likesCount={post.likesCount}/>)
   return (
     <div>
       <div className={styles.myPostBlock}>
@@ -11,7 +12,7 @@ const MyPosts = () => {
         <div>
           <h4>New post</h4>
           <div>
-            <textarea name="post" id="newPost" cols="30" rows="10"></textarea>
+            <textarea name="post" id="newPost" cols="30" rows="10"/>
           </div>
           <div>
             <button>Add post</button>
@@ -19,8 +20,7 @@ const MyPosts = () => {
         </div>
       </div>
       <div className={styles.posts}>
-        <Post message="Hi, how are yuo?" like="15"/>
-        <Post message="It's my first post!" like="20"/>
+        {postElements}
       </div>
     </div>
   )
