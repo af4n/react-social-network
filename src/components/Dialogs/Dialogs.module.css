@@ -6,11 +6,31 @@
     padding: 25px;
 }
 .dialog {
-    color: gray;
+    max-height: 50px;
+    display: table;
 }
-.dialog.active {
+.dialog a{
+    color: gray;
+    text-decoration: none;
+    display: table-cell;
+    vertical-align: middle;
+    padding-left: 10px;
+}
+.dialog img{
+    height: 30px;
+}
+.dialog a.activeLink {
     color: black;
 }
 .messages {
     padding: 25px;
+    display: block;
+}
+
+.message {
+    padding: 10px 15px;
+    border: 1px solid gray;
+    border-radius: 20px;
+    display: table;
+    margin-bottom: 10px;
 }
