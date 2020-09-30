@@ -5,9 +5,9 @@ import styles from "./ProfileInfo.module.css";
 const ProfileInfo = () => {
   return (
     <div>
-      <div>
+      <div className={styles.ProfileInfoImage}>
         <img
-          src="https://p.bigstockphoto.com/GeFvQkBbSLaMdpKXF1Zv_bigstock-Aerial-View-Of-Blue-Lakes-And--227291596.jpg"
+          src="https://previews.123rf.com/images/pariwatlp/pariwatlp1411/pariwatlp141100040/33282388-abstract-social-network-and-technology-background.jpg"
           alt="image"
         />
       </div>
