@@ -7,9 +7,9 @@ let state = {
       { id: 2, likesCount: 21, message: "It's my first post!" },
       { id: 3, likesCount: 9, message: "Hello." }
     ],
-    newPostText: ''
+    newPostText: 'blya'
   },
-  dialogsPage: {
+  dialogPage: {
     dialogs: [
       { id: 1, name: "Dima" },
       { id: 2, name: "Ilona" },
@@ -20,11 +20,27 @@ let state = {
       { id: 2, message: "How is yuor"},
       { id: 3, message: "Yo!"},
       { id: 4, message: "Goodbye"},
-    ]
+    ],
+    newMessageText: 'blya'
   },
 };
 
 window.state = state;
+
+export let addMessage = () => {
+  let newMessage = {
+    id: 5,
+    message: state.dialogPage.newMessageText
+  };
+  state.dialogPage.messages.push(newMessage);
+  state.dialogPage.newMessageText = '';
+  rerenderEntireTree(state);
+}
+
+export let updateNewMessageText = (newText) => {
+  state.dialogPage.newMessageText = newText;
+  rerenderEntireTree(state);
+}
 
 export let addPost = () => {
   let newPost = {

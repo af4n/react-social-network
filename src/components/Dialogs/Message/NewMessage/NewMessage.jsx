@@ -1,21 +1,27 @@
 import React from "react";
-import styles from "../../Dialogs.module.css"
 
 const NewMessage = (props) => {
   let newMessageElement = React.createRef();
+
   let addMessage = () => {
-    let text = newMessageElement.current.value
-    console.log(text)
+    props.addMessage();
   }
+
+  let onMessageChange = () => {
+    let text = newMessageElement.current.value;
+    props.updateNewMessageText(text);
+  }
+
   return (
     <div>
       <div>
         <h4>New message</h4>
         <div>
-          <textarea name="post" id="newMessageElement" cols="30" rows="10"/>
+          <textarea onChange={onMessageChange} name="message" ref={newMessageElement} id="newMessage" cols="30"
+                    rows="10" value={props.newMessageText}/>
         </div>
         <div>
-          <button onClick={ () => {console.log("New message")} }>New message</button>
+          <button onClick={addMessage}>New message</button>
         </div>
       </div>
     </div>

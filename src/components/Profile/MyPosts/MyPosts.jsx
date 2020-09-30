@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import styles from "./MyPosts.module.css";
 import Post from "./Post/Post";
@@ -24,10 +23,11 @@ const MyPosts = (props) => {
           <div>
             <h4>New post</h4>
             <div>
-              <textarea onChange={onPostChange} name="post" ref={newPostElement} id="newPost" cols="30" rows="10" value={props.newPostText}/>
+              <textarea onChange={onPostChange} name="post" ref={newPostElement} id="newPost" cols="30" rows="10"
+                        value={props.newPostText}/>
             </div>
             <div>
-              <button onClick={ addPost }>Add post</button>
+              <button onClick={addPost}>Add post</button>
             </div>
           </div>
         </div>
