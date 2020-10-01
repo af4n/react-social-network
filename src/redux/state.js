@@ -1,5 +1,5 @@
-const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+import dialogsReducer from "./dialogs-reducer";
+import profileReducer from "./profile-reducer";
 
 let store = {
   _state: {
@@ -37,40 +37,42 @@ let store = {
     this._callSubscriber = observer;
   },
 
-  addMessage() {
-    let newMessage = {
-      id: 5,
-      message: this._state.dialogPage.newMessageText
-    };
-    this._state.dialogPage.messages.push(newMessage);
-    this._state.dialogPage.newMessageText = '';
-    this._callSubscriber(this._state);
-  },
-  updateNewMessageText(newText) {
-    this._state.dialogPage.newMessageText = newText;
-    this._callSubscriber(this._state);
-  },
-
   dispatch(action) {
-    if (action.type === ADD_POST) {
-      let newPost = {
-        id: 4,
-        likesCount: 0,
-        message: this._state.profilePage.newPostText
-      };
-      this._state.profilePage.posts.push(newPost);
-      this._state.profilePage.newPostText = '';
-      this._callSubscriber(this._state);
-    } else if (action.type === UPDATE_NEW_POST_TEXT) {
-      this._state.profilePage.newPostText = action.newText;
-      this._callSubscriber(this._state);
-    }
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
+    this._callSubscriber(this._state);
   }
+  //   if (action.type === ADD_POST) {
+  //     let newPost = {
+  //       id: 4,
+  //       likesCount: 0,
+  //       message: this._state.profilePage.newPostText
+  //     };
+  //     this._state.profilePage.posts.push(newPost);
+  //     this._state.profilePage.newPostText = '';
+  //     this._callSubscriber(this._state);
+  //   } else if (action.type === UPDATE_NEW_POST_TEXT) {
+  //     this._state.profilePage.newPostText = action.newText;
+  //     this._callSubscriber(this._state);
+  //   } else if (action.type === ADD_MESSAGE) {
+  //     let newMessage = {
+  //       id: 5,
+  //       message: this._state.dialogPage.newMessageText
+  //     };
+  //     this._state.dialogPage.messages.push(newMessage);
+  //     this._state.dialogPage.newMessageText = '';
+  //     this._callSubscriber(this._state);
+  //   } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
+  //     this._state.dialogPage.newMessageText = action.newText;
+  //     this._callSubscriber(this._state);
+  //   }
+  // }
+
 }
 
-export const addPostActionCreator = () => ({type: ADD_POST})
-export const updateNewPostTextActionCreator = (text) =>
-  ({type: UPDATE_NEW_POST_TEXT, newText: text})
+
+
+
 
 window.store = store;
 export default store;
