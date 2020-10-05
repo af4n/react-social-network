@@ -9,7 +9,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 import Friends from "./components/Friends/Friends";
 import {Route} from "react-router-dom";
-import store from "./redux/state";
+import store from "./redux/store";
 
 const App = (props) => {
   return (
