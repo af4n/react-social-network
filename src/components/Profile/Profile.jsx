@@ -1,16 +1,14 @@
 /* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
-import MyPosts from "./MyPosts/MyPosts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import MyPostsContainer from "./MyPosts/MyPostsContainer";
 
 const Profile = (props) => {
 
   return (
     <div>
       <ProfileInfo />
-      <MyPosts store={props.store}
-               newPostText={props.store.getState().profilePage.newPostText}
-               dispatch={props.dispatch}/>
+      <MyPostsContainer store={props.store} />
     </div>
   );
 };
