@@ -19,7 +19,7 @@ let store = {
       ],
       messages: [
         { id: 1, message: "Hi"},
-        { id: 2, message: "How is yuor"},
+        { id: 2, message: "How is your"},
         { id: 3, message: "Yo!"},
         { id: 4, message: "Goodbye"},
       ],
@@ -42,31 +42,6 @@ let store = {
     this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
     this._callSubscriber(this._state);
   }
-  //   if (action.type === ADD_POST) {
-  //     let newPost = {
-  //       id: 4,
-  //       likesCount: 0,
-  //       message: this._state.profilePage.newPostText
-  //     };
-  //     this._state.profilePage.posts.push(newPost);
-  //     this._state.profilePage.newPostText = '';
-  //     this._callSubscriber(this._state);
-  //   } else if (action.type === UPDATE_NEW_POST_TEXT) {
-  //     this._state.profilePage.newPostText = action.newText;
-  //     this._callSubscriber(this._state);
-  //   } else if (action.type === ADD_MESSAGE) {
-  //     let newMessage = {
-  //       id: 5,
-  //       message: this._state.dialogPage.newMessageText
-  //     };
-  //     this._state.dialogPage.messages.push(newMessage);
-  //     this._state.dialogPage.newMessageText = '';
-  //     this._callSubscriber(this._state);
-  //   } else if (action.type === UPDATE_NEW_MESSAGE_TEXT) {
-  //     this._state.dialogPage.newMessageText = action.newText;
-  //     this._callSubscriber(this._state);
-  //   }
-  // }
 
 }
 

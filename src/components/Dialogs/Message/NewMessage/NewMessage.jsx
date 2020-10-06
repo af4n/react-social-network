@@ -7,7 +7,7 @@ const NewMessage = (props) => {
       <div>
         <h4>New message</h4>
         <div>
-          <textarea onChange={props.onMessageChange} name="message" id="newMessage" cols="30"
+          <textarea onChange={props.onNewMessageChange} name="message" id="newMessage" cols="30"
                     rows="10" value={props.newMessageText}/>
         </div>
         <div>

@@ -7,14 +7,15 @@ import NewMessage from "./Message/NewMessage/NewMessage";
 const Dialogs = (props) => {
 
   let state = props.dialogPage;
-  let dialogsElements = state.dialogs.map(dialog => <DialogItem name={dialog.name} id={dialog.id}/>)
-  let messagesElements = state.messages.map(message => <Message message={message.message}/>)
+  let dialogsElements = state.dialogs.map(dialog => <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>)
+  let messagesElements = state.messages.map(message => <Message message={message.message} key={message.id}/>)
 
   let onAddMessage = () => {
     props.sendMessage();
   }
 
-  let onMessageChange = (e) => {
+  let onNewMessageChange = (e) => {
+    debugger;
     let text = e.target.value;
     props.updateNewMessageText(text);
 
@@ -27,7 +28,7 @@ const Dialogs = (props) => {
       <div className={styles.messages}>
         {messagesElements}
         <NewMessage onAddMessage={onAddMessage}
-                    onMessageChange={onMessageChange}
+                    onNewMessageChange={onNewMessageChange}
                     newMessageText={props.newMessageText}/>
       </div>
     </div>
@@ -35,3 +36,9 @@ const Dialogs = (props) => {
 }
 
 export default Dialogs;
+
+//
+
+// <NewMessage onAddMessage={onAddMessage}
+//             onMessageChange={onMessageChange}
+//             newMessageText={props.newMessageText}/>
