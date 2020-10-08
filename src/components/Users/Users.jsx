@@ -3,55 +3,67 @@ import styles from "./Users.module.css"
 import * as axios from "axios";
 import userPhoto from "../../assets/images/user-photo.png"
 
-let Users = (props) => {
-
-  if (props.users.length === 0) {
-
-    axios.get("https://social-network.samuraijs.com/api/1.0/users")
+class Users extends React.Component {
+  componentDidMount() {
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`)
       .then(response => {
-        props.setUsers(response.data.items)
-      // props.setUsers([
-      //   { id: 1, followed: false,  fullName: 'Alexey', status: 'I am a boss!', location: {city: 'Kiev', country: 'Ukraine'},
-      //     photoUrl: 'https://lh3.googleusercontent.com/proxy/8tVV8AE9ZydHcHauEm3mh-VhTFai5gEdy_YOz9EHx2b4Rjdclu34u_xhC5x4B69L50-J5rah_4IBAk2KxIwaYwVEWE_K-6aYRjhvsHOfZu9GuFArx4k9_R2vbwi2Gs5GiYUtXJ40AjPI79-CaSZXw3Dz-0A' },
-      //   { id: 2, followed: true, fullName: 'Ilona', status: 'I am a boss too!', location: {city: 'Poltava', country: 'Ukraine'},
-      //     photoUrl: 'https://lh3.googleusercontent.com/proxy/QAqVGbdZuQ-lwh88NVJIrkcnEv2aVQD_UseQoXzoAmktD1Yv5PTRDgw4ESDcp1hE-uSqo4U70thKqLmONdU5Bwkp7s79093LL8yI83q0M3xy' },
-      //   { id: 3, followed: false, fullName: 'Dmitriy', status: 'I am a boss too!', location: {city: 'Mykolaiv', country: 'Ukraine'},
-      //     photoUrl: 'https://lh3.googleusercontent.com/proxy/8tVV8AE9ZydHcHauEm3mh-VhTFai5gEdy_YOz9EHx2b4Rjdclu34u_xhC5x4B69L50-J5rah_4IBAk2KxIwaYwVEWE_K-6aYRjhvsHOfZu9GuFArx4k9_R2vbwi2Gs5GiYUtXJ40AjPI79-CaSZXw3Dz-0A' },
-      //   { id: 4, followed: true, fullName: 'Nata', status: 'I am a boss too!', location: {city: 'Odessa', country: 'Ukraine'},
-      //     photoUrl: 'https://lh3.googleusercontent.com/proxy/QAqVGbdZuQ-lwh88NVJIrkcnEv2aVQD_UseQoXzoAmktD1Yv5PTRDgw4ESDcp1hE-uSqo4U70thKqLmONdU5Bwkp7s79093LL8yI83q0M3xy' }
-      // ])
-    })
+        this.props.setUsers(response.data.items)
+        this.props.setTotalUsersCount(response.data.totalCount);
+      })
   }
 
-  return (
-    <div>
-      {
-        props.users.map(u => <div key={u.id}>
-            <div>
+  onPageChanged = (pageNumber) => {
+    this.props.setCurrentPage(pageNumber)
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pageSize}`)
+      .then(response => {
+        this.props.setUsers(response.data.items);
+      })
+  }
+
+  render() {
+
+    let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pageSize);
+    let pages = [];
+    for (let i=1; i <= pagesCount; i++) {
+      pages.push(i)
+    }
+
+    return (
+      <div>
+        <div className={styles.pagination}>
+          {pages.map(p => {
+            return <span className={this.props.currentPage === p && styles.selectedPage}
+                         onClick={(e) => {this.onPageChanged(p)}}>{p}</span>
+          })}
+        </div>
+        {
+          this.props.users.map(u => <div key={u.id}>
               <div>
-                <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto} alt="photo"/>
+                <div>
+                  <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto} alt="photo"/>
+                </div>
+                <div>
+                  { u.followed
+                    ? <button onClick={ () => {this.props.unfollow(u.id)}}>Unfollow</button>
+                    : <button onClick={ () => {this.props.follow(u.id)}}>Follow</button>}
+                </div>
               </div>
               <div>
-                { u.followed
-                  ? <button onClick={ () => {props.unfollow(u.id)}}>Unfollow</button>
-                  : <button onClick={ () => {props.follow(u.id)}}>Follow</button>}
+                <div>
+                  <span>{u.name}</span>
+                  <span>{u.status}</span>
+                </div>
+                <div>
+                  <span>{"u.location.country"}</span>
+                  <span>{"u.location.city"}</span>
+                </div>
               </div>
             </div>
-            <div>
-              <div>
-                <span>{u.name}</span>
-                <span>{u.status}</span>
-              </div>
-              <div>
-                <span>{"u.location.country"}</span>
-                <span>{"u.location.city"}</span>
-              </div>
-            </div>
-          </div>
-        )
-      }
-    </div>
-  )
+          )
+        }
+      </div>
+    )
+  }
 }
 
 export default Users;
