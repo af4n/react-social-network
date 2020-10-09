@@ -10,3 +10,16 @@
 .discriptionInfo {
     padding-left: 25px;
 }
+
+.contscts div{
+    padding-left: 15px;
+}
+
+.contscts div a {
+    color: black;
+    text-decoration: none;
+}
+
+.contscts div a:hover {
+    opacity: .8;
+}

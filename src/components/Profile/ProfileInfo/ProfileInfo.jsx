@@ -1,5 +1,6 @@
 import React from "react";
 import styles from "./ProfileInfo.module.css";
+import {NavLink} from "react-router-dom";
 
 const ProfileInfo = (props) => {
   return (
@@ -15,19 +16,16 @@ const ProfileInfo = (props) => {
           <img src={props.profile.photos.large} alt="photo"/>
         </div>
         <div className={styles.discriptionInfo}>
-          <div>{props.profile.fullName}</div>
-          <div>{props.profile.aboutMe}</div>
-          <div>
-            <span>Contacts:</span>
-            <div>{props.profile.contacts.facebook}</div>
-            <div>{props.profile.contacts.github}</div>
-            <div>{props.profile.contacts.website}</div>
-            <div>{props.profile.contacts.vk}</div>
-            <div>{props.profile.contacts.twitter}</div>
-            <div>{props.profile.contacts.instagram}</div>
+          <div><b>{props.profile.fullName}</b></div>
+          <div><b>About me:</b> {props.profile.aboutMe}</div>
+          <div className={styles.contscts}>
+            <span><b>Contacts:</b></span>
+            <div><a href="https://www.facebook.com">{props.profile.contacts.facebook}</a></div>
+            <div><a href="https://www.github.com">{props.profile.contacts.github}</a></div>
+            <div><a href="https://www.vk.com">{props.profile.contacts.vk}</a></div>
+            <div><a href="https://www.twitter.com">{props.profile.contacts.twitter}</a></div>
+            <div><a href="https://www.instagram.com">{props.profile.contacts.instagram}</a></div>
           </div>
-          <div>{props.profile.lookingForAJob}</div>
-          <div>{props.profile.lookingForAJobDescription}</div>
         </div>
       </div>
     </div>
