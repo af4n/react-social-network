@@ -1,8 +1,7 @@
-/* eslint-disable jsx-a11y/img-redundant-alt */
 import React from "react";
 import styles from "./ProfileInfo.module.css";
 
-const ProfileInfo = () => {
+const ProfileInfo = (props) => {
   return (
     <div>
       <div className={styles.ProfileInfoImage}>
@@ -11,7 +10,26 @@ const ProfileInfo = () => {
           alt="image"
         />
       </div>
-      <div className={styles.discripshinBlock}>ava + disc</div>
+      <div className={styles.discriptionBlock}>
+        <div>
+          <img src={props.profile.photos.large} alt="photo"/>
+        </div>
+        <div className={styles.discriptionInfo}>
+          <div>{props.profile.fullName}</div>
+          <div>{props.profile.aboutMe}</div>
+          <div>
+            <span>Contacts:</span>
+            <div>{props.profile.contacts.facebook}</div>
+            <div>{props.profile.contacts.github}</div>
+            <div>{props.profile.contacts.website}</div>
+            <div>{props.profile.contacts.vk}</div>
+            <div>{props.profile.contacts.twitter}</div>
+            <div>{props.profile.contacts.instagram}</div>
+          </div>
+          <div>{props.profile.lookingForAJob}</div>
+          <div>{props.profile.lookingForAJobDescription}</div>
+        </div>
+      </div>
     </div>
   );
 };
