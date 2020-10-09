@@ -2,10 +2,10 @@ import React from "react";
 import Users from "./Users";
 import Preloader from "../Common/Preloader/Preloader";
 import {
-  followActionCreator,
-  setCurrentPageActionCreator,
-  setUsersActionCreator, setUsersTotalCountActionCreator, toggleIsFetchingActionCreator,
-  unfollowActionCreator
+  follow,
+  setCurrentPage,
+  setUsers, setUsersTotalCount, toggleIsFetching,
+  unfollow
 } from "../../redux/users-reducer";
 import {connect} from "react-redux";
 import * as axios from "axios";
@@ -56,27 +56,34 @@ let mapStateToProps = (state) => {
   }
 }
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-    follow: (usersId) => {
-      dispatch(followActionCreator(usersId));
-    },
-    unfollow: (usersId) => {
-      dispatch(unfollowActionCreator(usersId));
-    },
-    setUsers: (users) => {
-      dispatch(setUsersActionCreator(users));
-    },
-    setCurrentPage: (pageNumber) => {
-      dispatch(setCurrentPageActionCreator(pageNumber))
-    },
-    setTotalUsersCount: (totalCount) => {
-      dispatch(setUsersTotalCountActionCreator(totalCount))
-    },
-    toggleIsFetching: (isFetching) => {
-      dispatch(toggleIsFetchingActionCreator(isFetching))
-    }
-  }
-}
+// let mapDispatchToProps = (dispatch) => {
+//   return {
+//     follow: (usersId) => {
+//       dispatch(followActionCreator(usersId));
+//     },
+//     unfollow: (usersId) => {
+//       dispatch(unfollowActionCreator(usersId));
+//     },
+//     setUsers: (users) => {
+//       dispatch(setUsersActionCreator(users));
+//     },
+//     setCurrentPage: (pageNumber) => {
+//       dispatch(setCurrentPageActionCreator(pageNumber))
+//     },
+//     setTotalUsersCount: (totalCount) => {
+//       dispatch(setUsersTotalCountActionCreator(totalCount))
+//     },
+//     toggleIsFetching: (isFetching) => {
+//       dispatch(toggleIsFetchingActionCreator(isFetching))
+//     }
+//   }
+// }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default connect(mapStateToProps, {
+  follow: follow,
+  unfollow: unfollow,
+  setUsers: setUsers,
+  setCurrentPage: setCurrentPage,
+  setTotalUsersCount: setUsersTotalCount,
+  toggleIsFetching: toggleIsFetching
+})(UsersContainer);
