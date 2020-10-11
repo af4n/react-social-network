@@ -1,15 +1,32 @@
 .header {
   grid-area: h;
   padding-left: 25px;
+  padding-right: 25px;
   height: 100px;
   line-height: 100px;
+  display: flex;
+  justify-content: space-between;
 }
   
-.header img {
+.header div img {
   height: 60px;
   vertical-align: middle;
 }
-.header span {
+.header div span {
   padding-left: 10px;
   font-size: 20px;
+}
+
+.loginBlock {
+  float: right;
+}
+
+.loginBlock a {
+  color: gray;
+  text-decoration: none;
+}
+
+.loginBlock a:focus {
+  color: black;
+  outline: none;
 }
