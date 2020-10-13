@@ -3,9 +3,10 @@ import styles from "./Dialogs.module.css"
 import DialogItem from "./DialogItems/DialogItem";
 import Message from "./Message/Message";
 import NewMessage from "./Message/NewMessage/NewMessage";
+import Redirect from "react-router-dom/es/Redirect";
+
 
 const Dialogs = (props) => {
-
   let state = props.dialogPage;
   let dialogsElements = state.dialogs.map(dialog => <DialogItem name={dialog.name} key={dialog.id} id={dialog.id}/>)
   let messagesElements = state.messages.map(message => <Message message={message.message} key={message.id}/>)
@@ -15,11 +16,10 @@ const Dialogs = (props) => {
   }
 
   let onNewMessageChange = (e) => {
-    debugger;
     let text = e.target.value;
     props.updateNewMessageText(text);
-
   }
+  // if (!props.isAuth) return <Redirect to={"/login"} />
   return (
     <div className={styles.dialogs}>
       <div className={styles.dialogItems}>
@@ -36,9 +36,3 @@ const Dialogs = (props) => {
 }
 
 export default Dialogs;
-
-//
-
-// <NewMessage onAddMessage={onAddMessage}
-//             onMessageChange={onMessageChange}
-//             newMessageText={props.newMessageText}/>

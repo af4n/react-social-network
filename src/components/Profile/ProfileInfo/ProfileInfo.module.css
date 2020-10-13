@@ -1,6 +1,7 @@
 .discriptionBlock {
     padding: 25px;
     display: flex;
+    justify-content: space-between;
 }
 .ProfileInfoImage img{
     width: 100%;
