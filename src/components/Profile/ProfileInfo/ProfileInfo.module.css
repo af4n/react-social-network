@@ -24,3 +24,8 @@
 .contscts div a:hover {
     opacity: .8;
 }
+
+.userPhoto {
+    max-width: 250px;
+    max-height: 250px;
+}
