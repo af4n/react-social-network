@@ -29,25 +29,18 @@ let store = {
   _callSubscriber() {
     console.log('state changed')
   },
-
   getState() {
     return this._state
   },
   subscribe(observer) {
     this._callSubscriber = observer;
   },
-
   dispatch(action) {
     this._state.profilePage = profileReducer(this._state.profilePage, action);
     this._state.dialogPage = dialogsReducer(this._state.dialogPage, action);
     this._callSubscriber(this._state);
   }
-
 }
-
-
-
-
 
 window.store = store;
 export default store;

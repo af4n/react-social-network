@@ -3,17 +3,3 @@
     height: 100px;
 }
 
-.pagination {
-    float: right;
-}
-
-.pagination span{
-    cursor: pointer;
-}
-.pagination span:hover{
-    opacity: 0.7;
-}
-
-.selectedPage {
-    font-weight: bold;
-}

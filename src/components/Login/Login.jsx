@@ -2,27 +2,21 @@ import React from "react";
 import styles from "../Common/FormsControls/FormsControls.module.css"
 import {Field, reduxForm} from "redux-form";
 import {maxLengthCreator, required} from "../../utils/validators";
-import {Input} from "../Common/FormsControls/FormsControls";
+import {createField, Input} from "../Common/FormsControls/FormsControls";
 import {login} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import Redirect from "react-router-dom/es/Redirect";
+import Preloader from "../Common/Preloader/Preloader";
+
 
 const maxLength30 = maxLengthCreator(30)
 
 const LoginForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
-      <div>
-        <Field type="text" name={"email"} placeholder={"Email"} component={Input}
-               validate={[required, maxLength30]}/>
-      </div>
-      <div>
-        <Field type="password" name={"password"} placeholder={"Password"} component={Input}
-               validate={[required, maxLength30]}/>
-      </div>
-      <div>
-        <Field type="checkbox" name={"rememberMe"} component={Input}/> Remember me
-      </div>
+      {createField("text", "email", "Email", [required, maxLength30], Input)}
+      {createField("password", "password", "Password", [required, maxLength30], Input)}
+      {createField("checkbox", "rememberMe", null, null, Input)}
       {props.error && <div className={styles.formSummaryError}>
         {props.error}
       </div>}
@@ -43,9 +37,8 @@ const Login = (props) => {
     props.login(formData.email, formData.password, formData.rememberMe)
   }
   if (props.isAuth) {
-    return <Redirect to={"/profile"} />
+    return <Redirect to="/profile" />
   }
-
   return (
     <div>
       <h1>Login</h1>
