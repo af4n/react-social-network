@@ -1,5 +1,5 @@
 .pagination {
-  float: right;
+
 }
 
 .pagination span{
@@ -11,4 +11,13 @@
 
 .selectedPage {
   font-weight: bold;
+}
+
+.pageNumber {
+  margin: 0 2px;
+}
+
+.btnPagination {
+  vertical-align: text-top;
+  margin: 0 10px;
 }
