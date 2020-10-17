@@ -4,12 +4,21 @@ import userPhoto from "../../../assets/images/user-photo.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 
 const ProfileInfo = (props) => {
+  const onMainPhotoSelected = (e) => {
+    if (e.target.files.length) {
+      props.savePhoto(e.target.files[0]);
+    }
+  }
+
   return (
     <div>
 
       <div className={styles.discriptionBlock}>
         <div>
           <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto} className={styles.userPhoto} alt="photo"/>
+          {
+            props.isOwner && <input type={"file"} onChange={onMainPhotoSelected} />
+          }
         </div>
 
         <div className={styles.discriptionInfo}>
