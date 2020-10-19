@@ -1,13 +1,23 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./ProfileInfo.module.css";
 import userPhoto from "../../../assets/images/user-photo.png";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
+import ProfileDataForm from "./ProfileDataForm";
 
 const ProfileInfo = (props) => {
+  let [editMode, setEditMode] = useState(false)
+
   const onMainPhotoSelected = (e) => {
     if (e.target.files.length) {
       props.savePhoto(e.target.files[0]);
     }
+  }
+
+  const onSubmit = (formData) => {
+    const promise = props.saveProfile(formData)
+    promise.then(() => {
+      setEditMode(false)
+    })
   }
 
   return (
@@ -22,16 +32,11 @@ const ProfileInfo = (props) => {
         </div>
 
         <div className={styles.discriptionInfo}>
-          <div><b>{props.profile.fullName}</b></div>
-          <div><b>About me:</b> {props.profile.aboutMe}</div>
-          <div className={styles.contscts}>
-            <span><b>Contacts:</b></span>
-            <div><a href="https://www.facebook.com">{props.profile.contacts.facebook}</a></div>
-            <div><a href="https://www.github.com">{props.profile.contacts.github}</a></div>
-            <div><a href="https://www.vk.com">{props.profile.contacts.vk}</a></div>
-            <div><a href="https://www.twitter.com">{props.profile.contacts.twitter}</a></div>
-            <div><a href="https://www.instagram.com">{props.profile.contacts.instagram}</a></div>
-          </div>
+          {
+            editMode
+              ? <ProfileDataForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} />
+              : <ProfileData goToEditMode={() => {setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>
+          }
         </div>
 
         <ProfileStatusWithHooks status={props.status}
@@ -40,5 +45,35 @@ const ProfileInfo = (props) => {
     </div>
   );
 };
+
+const ProfileData = (props) => {
+  return (
+    <div>
+      <div>
+        {props.isOwner && <button onClick={props.goToEditMode}>Edit</button>}
+      </div>
+      <div><b>Full name</b>: {props.profile.fullName}</div>
+      <div><b>Looking for a job</b>: {props.profile.lookingForAJob ? "yes" : "no"}</div>
+      {
+        props.profile.lookingForAJob &&
+        <div><b>My professional skills</b>: {props.profile.lookingForAJobDescription}</div>
+      }
+      <div><b>About me</b>: {props.profile.aboutMe}</div>
+      <div>
+        <b>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {
+        return <Contact key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>
+      })}
+      </div>
+    </div>
+  )
+}
+
+
+
+export const Contact = ({contactTitle, contactValue}) => {
+  return (
+    <div><b>{contactTitle}</b>: {contactValue}</div>
+  )
+}
 
 export default ProfileInfo;
