@@ -15,9 +15,18 @@ import {initializeApp} from "./redux/app-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
 
 class App extends React.Component {
+  catchAllUnhandledErrors = (promiseRejectionEvent) => {
+    alert("Some error occured")
+    console.log(promiseRejectionEvent)
+  }
   componentDidMount() {
     this.props.initializeApp();
+    window.addEventListener("unhandledrejection", this.catchAllUnhandledErrors)
   }
+  componentWillUnmount() {
+    window.removeEventListener("unhandledrejection", this.catchAllUnhandledErrors)
+  }
+
   render() {
     if (!this.props.initialized) {
       return <Preloader />
@@ -35,7 +44,7 @@ class App extends React.Component {
                  render={() => <DialogsContainer/>}/>
           <Route path="/users"
                  render={() => <UsersContainer/>}/>
-          <Route path="/settings" component={Settings}/>
+          <Route path="/settings" component={Settings} />
         </div>
       </div>
     );
