@@ -30,14 +30,14 @@ const MyPosts = React.memo(props => {
   );
 });
 
-const maxLength10 = maxLengthCreator(10)
+const maxLength50 = maxLengthCreator(50)
 
 let AddNewPostForm = (props) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form className={styles.addNewPost} onSubmit={props.handleSubmit}>
       <div>
         <Field name={"newPostText"} component={Textarea} placeholder={"Enter your post"}
-               validate={[required, maxLength10]}/>
+               validate={[required, maxLength50]}/>
       </div>
       <div>
         <button>Add post</button>

@@ -4,3 +4,7 @@
 .myPostTitle {
     text-align: center;
 }
+
+.addNewPost button{
+    margin-top: 10px;
+}

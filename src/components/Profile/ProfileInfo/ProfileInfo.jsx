@@ -24,19 +24,15 @@ const ProfileInfo = (props) => {
     <div>
 
       <div className={styles.discriptionBlock}>
-        <div>
+        <div className={styles.profilePhoto}>
           <img src={props.profile.photos.large != null ? props.profile.photos.large : userPhoto} className={styles.userPhoto} alt="photo"/>
-          {
-            props.isOwner && <input type={"file"} onChange={onMainPhotoSelected} />
-          }
+          {props.isOwner && <input type={"file"} onChange={onMainPhotoSelected} />}
         </div>
 
         <div className={styles.discriptionInfo}>
-          {
-            editMode
+          {editMode
               ? <ProfileDataForm initialValues={props.profile} profile={props.profile} onSubmit={onSubmit} />
-              : <ProfileData goToEditMode={() => {setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>
-          }
+              : <ProfileData goToEditMode={() => {setEditMode(true)}} profile={props.profile} isOwner={props.isOwner}/>}
         </div>
 
         <ProfileStatusWithHooks status={props.status}
@@ -48,10 +44,8 @@ const ProfileInfo = (props) => {
 
 const ProfileData = (props) => {
   return (
-    <div>
-      <div>
-        {props.isOwner && <button onClick={props.goToEditMode}>Edit</button>}
-      </div>
+    <div className={styles.profileData}>
+
       <div><b>Full name</b>: {props.profile.fullName}</div>
       <div><b>Looking for a job</b>: {props.profile.lookingForAJob ? "yes" : "no"}</div>
       {
@@ -64,6 +58,9 @@ const ProfileData = (props) => {
         return <Contact key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>
       })}
       </div>
+      <div>
+        {props.isOwner && <button onClick={props.goToEditMode}>Edit</button>}
+      </div>
     </div>
   )
 }
@@ -72,7 +69,7 @@ const ProfileData = (props) => {
 
 export const Contact = ({contactTitle, contactValue}) => {
   return (
-    <div><b>{contactTitle}</b>: {contactValue}</div>
+    <div className={styles.contact}><b>{contactTitle}</b>: {contactValue}</div>
   )
 }
 
